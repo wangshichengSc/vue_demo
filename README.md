@@ -1,3 +1,4 @@
+vue-cli element-ui
 # vue_demo
 
 > A Vue.js project
