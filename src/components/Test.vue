@@ -20,7 +20,6 @@
     },
     mounted() {
       this.pa = this.$route.params.data
-      alert(this.pa);
     },
     methods: {
       ck: function () {

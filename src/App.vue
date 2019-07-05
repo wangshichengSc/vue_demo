@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <el-container>
-      <el-header style="text-align: right; font-size: 12px">
+    <el-container direction="vertical">
+      <el-header class="header" v-if="this.$store.state.isLogin">
         <Head></Head>
       </el-header>
       <el-container>
-        <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+        <el-aside class="aside" width="250px" v-if="this.$store.state.isLogin">
           <Navigation></Navigation>
         </el-aside>
         <el-main>
@@ -32,20 +32,26 @@
 
 <style>
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
+    /*-webkit-font-smoothing: antialiased;*/
+    /*-moz-osx-font-smoothing: grayscale;*/
     /*text-align: center;*/
-    color: #2c3e50;
+    /*color: #2c3e50;*/
     /*margin-top: 60px;*/
   }
-  .el-header {
+
+  .header {
     background-color: #B3C0D1;
     color: #333;
     line-height: 60px;
+    text-align: right;
+    font-size: 12px
   }
 
-  .el-aside {
+  .aside {
     color: #333;
+    height: 600px;
+    background-color: rgb(238, 241, 246);
+    border: 1px solid #eee
   }
 </style>
