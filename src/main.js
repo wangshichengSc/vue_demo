@@ -9,6 +9,7 @@ import ElementUI from 'element-ui' //element-ui的全部组件
 import 'element-ui/lib/theme-chalk/index.css'//element-ui的css
 import axios from 'axios'
 import Vuex from 'vuex'
+import '@/assets/css/reset.css'
 
 Vue.use(ElementUI); //使用elementUI
 Vue.config.productionTip = false;
@@ -18,20 +19,19 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    token: '',
-    userName: '',
-    isLogin: false
+    tokenId: sessionStorage.getItem("tokenId"),
+    userName: sessionStorage.getItem("userName"),
+    isLogin: sessionStorage.getItem("loginState")
   },
   mutations: {
-    ['LOGIN_TOKEN'](state, token) {
-      sessionStorage.setItem("token", token);
-      state.token = token;
-    },
-    ['LOGIN_USERNAME'](state, userName) {
-      state.userName = userName;
-    },
-    ['LOGIN_STATE'](state, loginState){
-      state.isLogin = loginState;
+    loginEvent(state, data) {
+      console.log(JSON.stringify(data));
+      state.userName = data.userName;
+      state.isLogin = data.isLogin;
+      state.tokenId = data.tokenId;
+      sessionStorage.setItem("tokenId", data.tokenId);
+      sessionStorage.setItem("userName", data.userName);
+      sessionStorage.setItem("loginState", data.isLogin);
     }
   }
 });
@@ -41,7 +41,7 @@ Vue.prototype.$store = store;
 router.beforeEach((to, from, next) => {
   store.state.token = sessionStorage.getItem('token');//获取本地存储的token
   if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
-    if (store.state.token !== "" && store.state.token != null) {  // 通过vuex state获取当前的token是否存
+    if (store.state.tokenId !== "" && store.state.tokenId != null) {  // 通过vuex state获取当前的token是否存
       next();
     } else {
       next({

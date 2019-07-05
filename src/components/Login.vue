@@ -30,9 +30,14 @@
     methods: {
       login() {
         // alert(this.password + "," + this.userName);
-        this.$store.commit('LOGIN_TOKEN', 'token1234');
-        this.$store.commit('LOGIN_USERNAME', 'wsc');
-        this.$store.commit('LOGIN_STATE', true);
+        // this.$store.commit('LOGIN_TOKEN', 'token1234');
+        // this.$store.commit('LOGIN_USERNAME', 'wsc');
+        // this.$store.commit('LOGIN_STATE', true);
+        this.$store.commit("loginEvent", {
+          tokenId: 'token1234',
+          userName: 'wsc',
+          isLogin: true
+        });
         // console.log(this.$route.query);
         let jumpPath = this.$route.query.redirect;
         if (jumpPath === '' || jumpPath == null || jumpPath == undefined) {
