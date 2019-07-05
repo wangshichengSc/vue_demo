@@ -39,7 +39,7 @@ const store = new Vuex.Store({
 Vue.prototype.$store = store;
 
 router.beforeEach((to, from, next) => {
-  store.state.token = sessionStorage.getItem('token');//获取本地存储的token
+  store.state.tokenId = sessionStorage.getItem('tokenId');//获取本地存储的token
   if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
     if (store.state.tokenId !== "" && store.state.tokenId != null) {  // 通过vuex state获取当前的token是否存
       next();
@@ -56,9 +56,9 @@ router.beforeEach((to, from, next) => {
 
 //配置请求拦截器
 axios.interceptors.request.use(config => {
-  let token = store.state.token;
-  if (token !== '' && token != null) {
-    config.headers['access-token'] = token;
+  let tokenId = store.state.tokenId;
+  if (tokenId !== '' && tokenId != null) {
+    config.headers['access-token'] = tokenId;
   }
   return config;
 }, function (error) {
